@@ -1,3 +1,4 @@
+import math
 from utils.vector import Vector
 from core.scene import Scene
 from core.camera import Camera
@@ -14,10 +15,12 @@ class RayTracer:
         
         print("Rendering...")
         for i in range(-self.camera.Cw // 2, self.camera.Cw // 2):
+            x = i + self.camera.Cw // 2
             for j in range(-self.camera.Ch // 2, self.camera.Ch // 2):
+                y = j + self.camera.Ch // 2
                 direction: Vector = self.camera.canvasToViewport(i, j)
-                color: tuple = self.scene.traceRay(self.camera.pos, direction)
-                self.img.putpixel((i, j), color)
+                color: tuple = self.scene.traceRay(self.camera.pos, direction, t_min=1.0, t_max=math.inf)
+                self.img.putpixel((x, y), color)
         self.saveImg("output.png")
         
     def saveImg(self, fileName: str):

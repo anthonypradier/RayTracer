@@ -22,6 +22,6 @@ class Sphere(Object3D):
         delta = b * b - 4 * a * c
         if delta < 0:
             return math.inf, math.inf
-        t1 = (-b + delta**0.5) / 2
-        t2 = (-b - delta**0.5) / 2
+        t1 = (-b + delta**0.5) / (2*a) 
+        t2 = (-b - delta**0.5) / (2*a)
         return t1, t2

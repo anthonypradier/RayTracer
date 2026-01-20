@@ -13,7 +13,7 @@ class Camera:
         
         self.pos: Vector = Vector(0, 0, 0)
         
-        self.canvas: List[list] = [[(0, 0, 0) for _ in range(4)] for _ in range(3)]
+        self.canvas: List[list] = [[(0, 0, 0) for _ in range(self.Cw)] for _ in range(self.Ch)]
     
     def __repr__(self) -> str:
         return f"Camera details :\n\tVw : {self.Vw} | Vh : {self.Vh}\n\tDistance d : {self.d}\n\tCw : {self.Cw} | Ch : {self.Ch}"
@@ -23,4 +23,4 @@ class Camera:
             x * self.Vw / self.Cw,
             y * self.Vh / self.Ch,
             self.d
-        ).normalize()
+        )
