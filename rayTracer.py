@@ -10,13 +10,16 @@ class RayTracer:
         self.img = Image.new(mode='RGB', size=(self.camera.Cw, self.camera.Ch))
     
     def renderScene(self):
+        self.scene.initScene()
+        
+        print("Rendering...")
         for i in range(-self.camera.Cw // 2, self.camera.Cw // 2):
             for j in range(-self.camera.Ch // 2, self.camera.Ch // 2):
-                # image pixel : (i, j), get the corresponding viewport point, trace a ray, determine the collision
                 direction: Vector = self.camera.canvasToViewport(i, j)
                 color: tuple = self.scene.traceRay(self.camera.pos, direction)
-                self.img.putpixel((i, j), (40, 40, 40))
+                self.img.putpixel((i, j), color)
         self.saveImg("output.png")
         
     def saveImg(self, fileName: str):
         self.img.save(fileName)
+        print("Render finished !")
