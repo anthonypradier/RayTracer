@@ -11,9 +11,10 @@ class Scene:
         self.bg: tuple = (0, 0, 0)
         
     def initScene(self):
-        self.addSphere(Vector(0, -1, 3), 1.0, (255, 0, 0))
-        self.addSphere(Vector(2, 0, 4), 1.0, (0, 0, 255))
-        self.addSphere(Vector(-2, 0, 4), 1.0, (0, 255, 0))
+        # self.addSphere(Vector(0, -1, 3), 1.0, (255, 0, 0))
+        # self.addSphere(Vector(2, 0, 4), 1.0, (0, 0, 255))
+        # self.addSphere(Vector(-2, 0, 4), 1.0, (0, 255, 0))
+        self.addSphere(Vector(3, 1, 6), 2.0, (0, 255, 0))
         print("Scene initialized")
         
     def addSphere(self, center: Vector, radius: float, color: Tuple[int]):
