@@ -8,7 +8,7 @@ class Camera:
         
         self.Vw: float = 1.0
         self.Vh: float = self.Vw*self.Ch/self.Cw
-        self.d: float = 4/3
+        self.d: float = 1.0
         
         self.pos: Vector = Vector(0, 0, 0)
         
@@ -17,9 +17,7 @@ class Camera:
     def __repr__(self) -> str:
         return f"Camera details :\n\tVw : {self.Vw} | Vh : {self.Vh}\n\tDistance d : {self.d}\n\tCw : {self.Cw} | Ch : {self.Ch}\nRatio : Canvas = {self.Cw/self.Ch} - viewport = {self.Vw/self.Vh}"
     
-    def canvasToViewport(self, x: int, y: int):
-        # Px: float = (x + 0.5 - self.Cw / 2) * self.Vw / self.Cw
-        # Py: float = (self.Ch / 2 - (y + 0.5)) * self.Vh / self.Ch
+    def canvasToViewport(self, x: int, y: int) -> Vector:
         Px: float = (x - self.Cw // 2) * self.Vw / self.Cw
         Py: float = (y - self.Ch // 2) * self.Vh / self.Ch
         Pz: float = self.d

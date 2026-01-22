@@ -11,7 +11,7 @@ class Sphere(Object3D):
     def __repr__(self) -> str:
         return f"Sphere(c: ({self.center.x}, {self.center.y}, {self.center.z}), r: {self.r}, color: {self.color})"
     
-    def intersect(self, O, D):
+    def intersect(self, O: Vector, D: Vector):
         r = self.r
         CO = O - self.center
         
