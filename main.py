@@ -3,8 +3,8 @@ from core.scene import Scene
 
 if __name__ == "__main__":
     scene = Scene()
-    scene.loadScene("scene1.json")
+    scene.loadScene("scene3.json")
     
-    recursion_depth: int = 2
+    recursion_depth: int = 1
     rayTracer = RayTracer(scene, recursion_depth)
     rayTracer.renderScene()

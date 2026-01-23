@@ -16,7 +16,7 @@ class Scene:
         self.objects: List[Object3D] = []
         self.lights: List[AbstractLight | AmbientLight | PointLight | DirLight] = []
         self.animations: List = []
-        self.bg: tuple = (0, 0, 0)
+        self.bg: tuple = (25, 25, 25)
         self.scene_parser = SceneParser(self)
         
     def traceRay(self, O: Vector, D: Vector, t_min: float = 1.0, t_max: float = math.inf, recursion_depth: int = 0) -> Tuple[int]:
@@ -38,7 +38,10 @@ class Scene:
         # reflected ray from the point in respect to the normal at the point
         R: Vector = reflect_ray(-D, N)
         reflected_color: tuple = self.traceRay(P, R, 0.001, math.inf, recursion_depth-1)
-        final_color: tuple = (int(local_color[0] * (1 - r) + reflected_color[0] * r), int(local_color[1] * (1 - r) + reflected_color[1] * r), int(local_color[2] * (1 - r) + reflected_color[2] * r))
+        final_r: int = int(local_color[0] * (1 - r) + reflected_color[0] * r) if int(local_color[0] * (1 - r) + reflected_color[0] * r) < 255 else 255
+        final_g: int = int(local_color[1] * (1 - r) + reflected_color[1] * r) if int(local_color[1] * (1 - r) + reflected_color[1] * r) < 255 else 255
+        final_b: int = int(local_color[2] * (1 - r) + reflected_color[2] * r) if int(local_color[2] * (1 - r) + reflected_color[2] * r) < 255 else 255
+        final_color: tuple = (final_r, final_g, final_b)
         return final_color
     
     def compute_lighting(self, point: Vector, normal: Vector, V: Vector, s: int) -> float:

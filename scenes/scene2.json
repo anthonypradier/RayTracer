@@ -1,0 +1,99 @@
+{
+  "objects": {
+    "spheres": [
+      {
+        "center": {
+          "x": -1.2,
+          "y": -0.6,
+          "z": 5.0
+        },
+        "radius": 0.7,
+        "color": {
+          "r": 255,
+          "g": 0,
+          "b": 0
+        },
+        "specular": 50,
+        "reflective": 0.2,
+        "animations": []
+      },
+      {
+        "center": {
+          "x": 0.0,
+          "y": 0.7,
+          "z": 8.0
+        },
+        "radius": 1.5,
+        "color": {
+          "r": 0,
+          "g": 0,
+          "b": 255
+        },
+        "specular": 500,
+        "reflective": 0.7,
+        "animations": []
+      },
+      {
+        "center": {
+          "x": 1.5,
+          "y": 0.9,
+          "z": 7.0
+        },
+        "radius": 0.9,
+        "color": {
+          "r": 0,
+          "g": 255,
+          "b": 0
+        },
+        "specular": -1,
+        "reflective": 0.4,
+        "animations": []
+      },
+      {
+        "center": {
+          "x": 1.5,
+          "y": 2,
+          "z": 7.0
+        },
+        "radius": 1.5,
+        "color": {
+          "r": 255,
+          "g": 255,
+          "b": 255
+        },
+        "specular": 500,
+        "reflective": 0,
+        "animations": []
+      }
+    ],
+    "planes": [],
+    "cubes": []
+  },
+  "lights": {
+    "points": [
+      {
+        "position": {
+          "x": 2.0,
+          "y": 1.0,
+          "z": 2.0
+        },
+        "intensity": 0.4
+      }
+    ],
+    "directionals": [
+      {
+        "direction": {
+          "x": -1.0,
+          "y": -1.0,
+          "z": 1.0
+        },
+        "intensity": 0.6
+      }
+    ],
+    "ambients": [
+      {
+        "intensity": 0.5
+      }
+    ]
+  }
+}
