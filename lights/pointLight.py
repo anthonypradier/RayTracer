@@ -1,5 +1,6 @@
 from lights.abstractLight import AbstractLight
 from utils.vector import Vector
+from core.scene import *
 
 class PointLight(AbstractLight):
     def __init__(self, intensity: float, position: Vector):
@@ -24,12 +25,19 @@ class PointLight(AbstractLight):
     def get_direction_from_point(self, point: Vector) -> Vector:
         return self.position - point
     
-    def get_intensity_at_point(self, point, normal, V: Vector, s: int):
+    def get_intensity_at_point(self, point, normal, V: Vector, s: int, scene):
         i: float = 0
         direction = self.get_direction_from_point(point)
         n_dot_l = direction.dot(normal)
+        t_max = 1.0
+         # shadow
+        shadow_sphere, shadow_t = scene.closest_intesrsection(point, direction, 1, t_max)
+        if shadow_sphere != None:
+            return i
+        # diffuse
         if n_dot_l > 0:
             i += self.intensity * n_dot_l / (normal.length() * direction.length())
+        # specular
         if s != -1:
             R: Vector = normal * 2 * normal.dot(direction) - direction
             r_dot_v = R.dot(V)

@@ -12,7 +12,6 @@ from utils._sceneKeys import *
 
 class SceneParser:
     def __init__(self, scene):
-        from core.scene import Scene
         self.scene: Scene = scene
         
     def parse_scene(self, jsonfile):
@@ -62,7 +61,7 @@ class SceneParser:
         specular = sphere[SPHERES_SPECULAR]
         reflective = sphere[SPHERES_REFLECTIVE]
         
-        s = Sphere(Vector(x, y, z), radius, (r, g, b), specular)
+        s = Sphere(Vector(x, y, z), radius, (r, g, b), specular, reflective)
         if len(sphere[ANIMATIONS]) != 0:
             self.parse_animations(sphere, s)
         return s

@@ -5,5 +5,6 @@ if __name__ == "__main__":
     scene = Scene()
     scene.loadScene("scene1.json")
     
-    rayTracer = RayTracer(scene)
+    recursion_depth: int = 2
+    rayTracer = RayTracer(scene, recursion_depth)
     rayTracer.renderScene()

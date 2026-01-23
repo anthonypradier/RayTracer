@@ -15,7 +15,7 @@ class Camera:
         self.canvas: List[list] = [[(0, 0, 0) for _ in range(self.Cw)] for _ in range(self.Ch)]
     
     def __repr__(self) -> str:
-        return f"Camera details :\n\tVw : {self.Vw} | Vh : {self.Vh}\n\tDistance d : {self.d}\n\tCw : {self.Cw} | Ch : {self.Ch}\nRatio : Canvas = {self.Cw/self.Ch} - viewport = {self.Vw/self.Vh}"
+        return f"Camera details :\n\tVw : {self.Vw} | Vh : {self.Vh}\n\tDistance d : {self.d}\n\tCw : {self.Cw} | Ch : {self.Ch}\n\tRatio : Canvas = {self.Cw/self.Ch} - viewport = {self.Vw/self.Vh}"
     
     def canvasToViewport(self, x: int, y: int) -> Vector:
         Px: float = (x - self.Cw // 2) * self.Vw / self.Cw

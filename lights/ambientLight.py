@@ -23,5 +23,5 @@ class AmbientLight(AbstractLight):
     def get_direction_from_point(self, point: Vector) -> Vector:
         return None
     
-    def get_intensity_at_point(self, point: Vector, normal: Vector, V: Vector, s: int):
+    def get_intensity_at_point(self, point: Vector, normal: Vector, V: Vector, s: int, scene):
         return self.intensity
