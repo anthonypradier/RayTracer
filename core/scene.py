@@ -1,7 +1,6 @@
 import math
 import json
 from typing import List, Tuple
-from utils.light_utils import compute_lighting
 from utils.vector import Vector
 from objects.sphere import Sphere
 from objects.object3D import Object3D
@@ -32,17 +31,18 @@ class Scene:
                 closest_obj = obj
         if closest_obj == None:
             return self.bg
-        P: Vector = O + closest_t * D  # Compute intersection
+        P: Vector = O + D * closest_t # Compute intersection
         N: Vector = P - closest_obj.center  # Compute sphere normal at intersection
         N = N.normalize()
-        return closest_obj.color * self.compute_lighting(P, N)
+        i: float = self.compute_lighting(P, N, -D, closest_obj.specular) # D is from the cam to the point, -D from the point to the cam
+        color: Tuple[int] = (int(closest_obj.color[0] * i), int(closest_obj.color[1] * i), int(closest_obj.color[2] * i))
+        return color
     
-    def compute_lighting(self, point: Vector, normal: Vector) -> float:
+    def compute_lighting(self, point: Vector, normal: Vector, V: Vector, s: int) -> float:
         i: float = 0.0
         for light in self.lights:
-            intensity: float = light.get_intensity()
-            position: Vector = light.get_position()
-            direction: Vector = light.get_direction_from_point(point)
+            i += light.get_intensity_at_point(point, normal, V, s)
+        return i  
     
     def loadScene(self, filename: str):
         """Load a complete scene from a json file. The file name in parameter can be './dir/file.json', '/dir/file.json', 'dir/file.json', 'file.json', or the same ones without '.json'.

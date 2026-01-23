@@ -42,18 +42,18 @@ class SceneParser:
         #         c: Cube = self.parse_cube(cube)
         #         self.scene.add_object(c)
         
-        # if len(point_lights) != 0:
-        #     for p_light in point_lights:
-        #         pl: PointLight = self.parse_point_light(p_light)
-        #         self.scene.add_light(pl)
-        # if len(directional_lights) != 0:
-        #     for d_light in directional_lights:
-        #         dl: DirLight = self.parse_directional_light(d_light)
-        #         self.scene.add_light(dl)
-        # if len(ambient_lights) != 0:
-        #     for a_light in ambient_lights:
-        #         al: AmbientLight = self.parse_ambient_light(a_light)
-        #         self.scene.add_light(al)
+        if len(point_lights) != 0:
+            for p_light in point_lights:
+                pl: PointLight = self.parse_point_light(p_light)
+                self.scene.add_light(pl)
+        if len(directional_lights) != 0:
+            for d_light in directional_lights:
+                dl: DirLight = self.parse_directional_light(d_light)
+                self.scene.add_light(dl)
+        if len(ambient_lights) != 0:
+            for a_light in ambient_lights:
+                al: AmbientLight = self.parse_ambient_light(a_light)
+                self.scene.add_light(al)
     
     def parse_sphere(self, sphere: dict) -> Sphere:
         x, y, z = sphere[SPHERES_CENTER][SPHERES_CENTER_X], sphere[SPHERES_CENTER][SPHERES_CENTER_Y], sphere[SPHERES_CENTER][SPHERES_CENTER_Z]
@@ -62,7 +62,7 @@ class SceneParser:
         specular = sphere[SPHERES_SPECULAR]
         reflective = sphere[SPHERES_REFLECTIVE]
         
-        s = Sphere(Vector(x, y, z), radius, (r, g, b))
+        s = Sphere(Vector(x, y, z), radius, (r, g, b), specular)
         if len(sphere[ANIMATIONS]) != 0:
             self.parse_animations(sphere, s)
         return s
@@ -90,17 +90,17 @@ class SceneParser:
     
     def parse_point_light(self, light: dict) -> PointLight:
         x, y, z = light[POINTS_POSITION][POINTS_POSITION_X], light[POINTS_POSITION][POINTS_POSITION_Y], light[POINTS_POSITION][POINTS_POSITION_Z]
-        r, g, b = light[POINTS_INTENSITY][POINTS_INTENSITY_R],light[POINTS_INTENSITY][POINTS_INTENSITY_G], light[POINTS_INTENSITY][POINTS_INTENSITY_B]
-        return PointLight(0.6, Vector(x, y, z))
+        intensity = light[POINTS_INTENSITY]
+        return PointLight(intensity, Vector(x, y, z))
     
     def parse_directional_light(self, light: dict) -> DirLight:
         x, y, z = light[DIRECTIONALS_DIRECTION][DIRECTIONALS_DIRECTION_X], light[DIRECTIONALS_DIRECTION][DIRECTIONALS_DIRECTION_Y], light[DIRECTIONALS_DIRECTION][DIRECTIONALS_DIRECTION_Z]
-        r, g, b = light[DIRECTIONALS_INTENSITY][DIRECTIONALS_INTENSITY_R],light[DIRECTIONALS_INTENSITY][DIRECTIONALS_INTENSITY_G], light[DIRECTIONALS_INTENSITY][DIRECTIONALS_INTENSITY_B]
-        return DirLight(0.2, Vector(x, y, z))
+        intensity = light[DIRECTIONALS_INTENSITY]
+        return DirLight(intensity, Vector(x, y, z))
     
     def parse_ambient_light(self, light: dict) -> AmbientLight:
-        r, g, b = light[AMBIENTS_INTENSITY][AMBIENTS_INTENSITY_R],light[AMBIENTS_INTENSITY][AMBIENTS_INTENSITY_G], light[AMBIENTS_INTENSITY][AMBIENTS_INTENSITY_B]
-        return AmbientLight(0.2)
+        intensity = light[AMBIENTS_INTENSITY]
+        return AmbientLight(intensity)
     
     # def parse_animations(self, object_dict: dict, object) :
     #     for anim in object_dict[ANIMATIONS]:

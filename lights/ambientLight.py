@@ -4,6 +4,9 @@ from utils.vector import Vector
 class AmbientLight(AbstractLight):
     def __init__(self, intensity: float):
         super().__init__(intensity, True)
+        
+    def __repr__(self):
+        return f"AmbientLight(intensity: {self.intensity})"
     
     def get_direction(self) -> Vector:
         return None
@@ -19,3 +22,6 @@ class AmbientLight(AbstractLight):
     
     def get_direction_from_point(self, point: Vector) -> Vector:
         return None
+    
+    def get_intensity_at_point(self, point: Vector, normal: Vector, V: Vector, s: int):
+        return self.intensity

@@ -4,12 +4,12 @@ from utils.vector import Vector
 from typing import Tuple
 
 class Sphere(Object3D):
-    def __init__(self, center: Vector, radius: float, color: Tuple[int]) -> Tuple[float]:
-        super().__init__(center, color)
+    def __init__(self, center: Vector, radius: float, color: Tuple[int], specular: int) -> Tuple[float]:
+        super().__init__(center, color, specular)
         self.r: float = radius
     
     def __repr__(self) -> str:
-        return f"Sphere(c: ({self.center.x}, {self.center.y}, {self.center.z}), r: {self.r}, color: {self.color})"
+        return f"Sphere(c: ({self.center.x}, {self.center.y}, {self.center.z}), r: {self.r}, color: {self.color}, specular: {self.specular})"
     
     def intersect(self, O: Vector, D: Vector):
         r = self.r
